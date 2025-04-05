@@ -40,8 +40,10 @@ set(EXERCISES
     HelloTriangle
     HelloTransform
     Hello2Triangles
+    HelloCircle
     Lista1/Ex6
     Lista1/Ex9
+    
 )
 
 add_compile_options(-Wno-pragmas)
