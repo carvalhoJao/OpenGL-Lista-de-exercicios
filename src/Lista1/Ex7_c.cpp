@@ -104,11 +104,12 @@ int main()
 	// Compilando e buildando o programa de shader
 	GLuint shaderID = setupShader();
 
-	// Gerando um buffer simples, com a geometria de um circulo
+	// Gerando um buffer simples, com a geometria de um triângulo
 	
 	int nPoints = 20;
 	GLuint VAO = createCircle(nPoints);
-	int nVertices = nPoints + 2;
+
+	int nVertices = nPoints + 2; 
 
 	// Enviando a cor desejada (vec4) para o fragment shader
 	// Utilizamos a variáveis do tipo uniform em GLSL para armazenar esse tipo de info
@@ -160,6 +161,9 @@ int main()
 		// Poligono Preenchido - GL_TRIANGLES
 		glUniform4f(colorLoc, 0.0f, 0.0f, 1.0f, 1.0f); // enviando cor para variável uniform inputColor
 		glDrawArrays(GL_TRIANGLE_FAN, 0, nVertices);
+
+		glUniform4f(colorLoc, 1.0f, 0.0f, 1.0f, 1.0f);
+		glDrawArrays(GL_LINE_LOOP, 1, nVertices);
 
 		// glBindVertexArray(0); // Desnecessário aqui, pois não há múltiplos VAOs
 
@@ -246,7 +250,7 @@ int createCircle(int nPoints, float radius)
 	vertices.push_back(0.0); //Centro de Y
 	vertices.push_back(0.0); //Centro de Z
 
-	for (int i = 0; i <= nPoints; i++)
+	for (int i = 0; i < nPoints; i++)
 	{
 		float x = radius * cos(angle);
 		float y = radius * sin(angle);

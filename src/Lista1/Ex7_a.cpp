@@ -53,10 +53,6 @@ int main()
 	// Inicialização da GLFW
 	glfwInit();
 
-	// Muita atenção aqui: alguns ambientes não aceitam essas configurações
-	// Você deve adaptar para a versão do OpenGL suportada por sua placa
-	// Sugestão: comente essas linhas de código para desobrir a versão e
-	// depois atualize (por exemplo: 4.5 com 4 e 5)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -64,11 +60,6 @@ int main()
 
 	// Ativa a suavização de serrilhado (MSAA) com 8 amostras por pixel
 	glfwWindowHint(GLFW_SAMPLES, 8);
-
-	// Essencial para computadores da Apple
-	// #ifdef __APPLE__
-	//	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	// #endif
 
 	// Criação da janela GLFW
 	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Ola Triangulo! -- Rossana", nullptr, nullptr);
@@ -106,7 +97,7 @@ int main()
 
 	// Gerando um buffer simples, com a geometria de um circulo
 	
-	int nPoints = 20;
+	int nPoints = 8;
 	GLuint VAO = createCircle(nPoints);
 	int nVertices = nPoints + 2;
 
@@ -123,7 +114,6 @@ int main()
 	// Loop da aplicação - "game loop"
 	while (!glfwWindowShouldClose(window))
 	{
-		// Este trecho de código é totalmente opcional: calcula e mostra a contagem do FPS na barra de título
 		{
 			double curr_s = glfwGetTime();		// Obtém o tempo atual.
 			double elapsed_s = curr_s - prev_s; // Calcula o tempo decorrido desde o último frame.
@@ -157,9 +147,12 @@ int main()
 		glBindVertexArray(VAO); // Conectando ao buffer de geometria
 
 		// Chamada de desenho - drawcall
-		// Poligono Preenchido - GL_TRIANGLES
 		glUniform4f(colorLoc, 0.0f, 0.0f, 1.0f, 1.0f); // enviando cor para variável uniform inputColor
 		glDrawArrays(GL_TRIANGLE_FAN, 0, nVertices);
+
+		glUniform4f(colorLoc, 1.0f, 1.0f, 0.0f, 1.0f); // enviando cor para variável uniform inputColor
+		glDrawArrays(GL_POINTS, 0, nVertices);
+
 
 		// glBindVertexArray(0); // Desnecessário aqui, pois não há múltiplos VAOs
 

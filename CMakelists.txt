@@ -42,6 +42,10 @@ set(EXERCISES
     Hello2Triangles
     HelloCircle
     Lista1/Ex6
+    Lista1/Ex7_a
+    Lista1/Ex7_b
+    Lista1/Ex7_c
+    Lista1/Ex8
     Lista1/Ex9
     
 )
